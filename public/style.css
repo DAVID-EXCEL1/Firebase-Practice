@@ -125,6 +125,7 @@
     transform: scale(0.9);
 }
 
+
 .agreement {
     display: block;
     text-align: center;
@@ -149,4 +150,15 @@
         linear-gradient(45deg, var(--color2) 25%, var(--color1) 25%, var(--color1) 75%, var(--color2) 75%, var(--color2));
     background-size: 60px 60px;
     background-position: 0 0, 30px 30px;
+}
+.signIn a{
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.signIn{
+    text-align: center;
+    margin-top: 5px;
+    text-decoration: none;
+    font-size: 12px;
 }
