@@ -49,7 +49,7 @@
                         </path>
                     </svg>
                 </button>
-                <button aria-label="Log in with GitHub" class="social-button github">
+                <button aria-label="Log in with GitHub" class="social-button github" id="github">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="svg" height="1em">
                         <path
                             d="M12,0C5.37,0,0,5.373,0,12c0,5.304,3.438,9.799,8.205,11.385,0.6,0.111,0.822-0.262,0.822-0.584,0-0.287-0.009-1.048-0.015-2.064-3.338,0.723-4.041-1.602-4.041-1.602-0.548-1.389-1.344-1.759-1.344-1.759-1.093-0.748,0.083-0.731,0.083-0.731,1.516,0.103,2.311,1.534,2.311,1.534,1.343,1.534,3.521,1.093,4.383,0.832,0.175-1.355,0.699-2.271,1.27-2.795-4.211-0.789-8.649-3.524-8.649-12.409,0-2.758,0.986-5.019,2.607-6.784-0.271-0.787-1.129-3.999,0.242-8.332 0,0,2.641-0.849,8.648,3.223 2.515-0.697 5.191-1.043 7.842-1.055 2.648,0.012 5.324,0.358 7.843,1.055 5.007-4.073 8.646-3.223 8.646-3.223 1.373 4.333 0.514 7.546 0.243,8.332 1.622,1.765 2.606,4.026 2.606,6.784 0,11.639-4.446,11.617-8.676,11.592,0.682,0.728,1.281,2.16,1.281,4.375 0,3.157-0.029,5.691-0.029,6.465 0,0.489,0.332,1.066,1.316,0.877C24.563,21.789,28,17.294,28,12C28,5.373,22.627,0,16,0L16,0z M16,18.462c-4.588,0-8.308-3.721-8.308-8.308s3.721-8.308,8.308-8.308s8.308,3.721,8.308,8.308S20.588,18.462,16,18.462L16,18.462z M22.09,18.462c-1.44,0-2.611-1.171-2.611-2.611c0-1.441,1.171-2.611,2.611-2.611c1.441,0,2.611,1.17,2.611,2.611C24.701,17.291,23.53,18.462,22.09,18.462L22.09,18.462z M12.91,18.462c-1.441,0-2.611-1.171-2.611-2.611c0-1.441,1.17-2.611,2.611-2.611c1.441,0,2.611,1.17,2.611,2.611C15.521,17.291,14.351,18.462,12.91,18.462L12.91,18.462z">
@@ -68,7 +68,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-        import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, TwitterAuthProvider } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, TwitterAuthProvider, GithubAuthProvider } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyB9IHHt-XpJ9lRA0KjpWG6NB52I2ozIi6Y",
@@ -83,6 +83,7 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app)
         const twitterProvide = new TwitterAuthProvider();
+        const githubProvider = new GithubAuthProvider();
         const db = getDatabase();
         auth.languageCode = 'en'
 
@@ -148,9 +149,30 @@
                 }).catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
+                    alert(error.message)
+                    console.log(error.code);
+                    console.log(error.message);
                 });
         })
 
+
+        const githubBtn = document.getElementById("github");
+        githubBtn.addEventListener('click', function () {
+            signInWithPopup(auth, githubProvider)
+                .then((answer) => {
+                    const githubCredential = GithubAuthProvider.credentialFromResult(answer);
+                    const user = answer.user;
+                    console.log(user);
+                    window.location.href = "dashboard.html"
+
+                }).catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert(error.message)
+                    console.log(error.code);
+                    console.log(error.message);
+                });
+        })
 
     </script>
 </body>

@@ -9,18 +9,16 @@
 </head>
 
 <body>
-    <form class="form">
-        <p class="title">Log In </p>
-        <p class="message">Log in now and continue from where you stopped. </p>
-        <label>
-            <input class="input" type="email" placeholder="" required="">
-            <span>Email</span>
-        </label>
-        <label>
-            <input class="input" type="password" placeholder="" required="">
-            <span>Password</span>
-        </label>
-        <button class="button" id="submit" onclick="signG()">Log In</button>
+
+    <div class="container-fluid" id="MainForm">
+        <div class="heading">Log In</div>
+        <form action="" class="form">
+            <input required="" class="input" type="email" name="text" id="email" placeholder="E-mail">
+            <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
+
+            <input class="login-button" id="sign" type="submit" value="Sign Up">
+
+        </form>
         <div class="social-account-container">
             <span class="title">Or Sign in with</span>
             <div class="social-accounts">
@@ -54,8 +52,9 @@
                 </button>
             </div>
         </div>
-        <p class="signin">Don't have an acount ? <a href="index.html">Sign Up</a> </p>
-    </form>
+        <p class="signIn">Already have an acount ? <a href="login.html">Sign in</a> </p>
+    </div>
+
 </body>
 
 </html>
